@@ -1,25 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import Konva from "konva";
+import { Stage, Layer, Rect, Text } from "react-konva";
+import Title from "./components/Title";
+import ColoredRect from "./components/ColoredRect";
 
 function App() {
+  const [toggle, setToggle] = useState(false);
+  const onClick = () => {
+    setToggle((prev) => !prev);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Title />
+      <div>
+        <button onClick={onClick}>Click</button>
+        <Stage width={window.innerWidth} height={window.innerHeight}>
+          <Layer>
+            <ColoredRect active={toggle} />
+          </Layer>
+        </Stage>
+      </div>
+    </>
   );
 }
 
