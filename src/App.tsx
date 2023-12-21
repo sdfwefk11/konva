@@ -9,6 +9,31 @@ function App() {
   const onClick = () => {
     setToggle((prev) => !prev);
   };
+  interface myObjType {
+    firstNum: number;
+    func: ({ secondNum, thirdNum }: funcPropsType) => void;
+    result: string;
+  }
+  type funcPropsType = {
+    secondNum: number;
+    thirdNum: number;
+  };
+  const a: number = 1;
+  const b: number = 1000;
+  const c: number = 2000;
+  const myObj: myObjType = {
+    firstNum: a,
+    func: function ({ secondNum, thirdNum }) {
+      const firstNum = this.firstNum;
+      const numCal = () => {
+        console.log(`${this.result}: ${firstNum + secondNum + thirdNum}`, this);
+      };
+      numCal();
+    },
+    result: "result",
+  };
+  const obj = myObj.func.bind(myObj);
+  obj({ secondNum: b, thirdNum: c });
   return (
     <>
       <Title />
